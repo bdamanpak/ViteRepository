@@ -1,0 +1,118 @@
+import "./style.css"
+
+const app = document.querySelector<HTMLDivElement>("#app");
+
+type BoxStuffType = {
+  element: string;
+  attr: any;
+  children: string | string[] | Element | Element[] | null;
+};
+
+const Box = (probs: BoxStuffType) => {
+  const el = document.createElement(probs.element);
+  el.className = probs.attr?.className;
+  if (!Array.isArray(probs.children)) el.append(probs.children!);
+  else el.append(...probs.children);
+  return el;
+};
+
+const containerForm = Box({
+  element: "div",
+  attr: {
+    className: "mx-auto my-auto bg-zinc-100 flex flex-col gap-5 px-12 mt-44 font-mono rounded-xl",
+  },
+  children: null
+});
+
+// const containerForm = document.createElement("div");
+// containerForm.className = "mx-auto my-auto bg-zinc-100 flex flex-col gap-5 px-12 mt-44 font-mono rounded-xl";
+containerForm.style.maxHeight = "700px";
+containerForm.style.maxWidth = "600px";
+
+
+const title = document.createElement("h2");
+title.className = "my-6 mt-7 text-2xl font-bold";
+title.innerText = "Contacts"
+
+
+const nameSection = document.createElement("input");
+nameSection.className = "flex items-center border-solid border-2 border-zinc-800 rounded-xl px-4 py-4 gap-3";
+nameSection.placeholder = "Enter The Name";
+
+
+const phoneSection = document.createElement("input");
+phoneSection.className = "flex items-center border-solid border-2 border-zinc-800 rounded-xl px-4 py-4 gap-3";
+phoneSection.placeholder = "Enter The Phone Number";
+
+
+
+const saveOptions = document.createElement("div");
+saveOptions.className = "flex justify-between";
+
+
+
+
+const SIM = document.createElement("div");
+SIM.className = "flex gap-2"
+
+const SIMCheckbox = document.createElement("INPUT");
+SIMCheckbox.setAttribute("type", "checkbox");
+
+const SIMLabel = document.createElement("LABEL");
+SIMLabel.innerText = "SIM";
+
+
+
+
+SIM.appendChild(SIMCheckbox);
+SIM.appendChild(SIMLabel);
+
+
+
+
+
+const phoneS = document.createElement("div");
+phoneS.className = "flex gap-2"
+
+const phoneCheckbox = document.createElement("INPUT");
+phoneCheckbox.setAttribute("type", "checkbox");
+
+const phoneLabel = document.createElement("LABEL");
+phoneLabel.innerText = "PHONE";
+
+
+
+
+phoneS.appendChild(phoneCheckbox);
+phoneS.appendChild(phoneLabel);
+
+
+
+saveOptions.appendChild(SIM);
+saveOptions.appendChild(phoneS);
+
+
+
+
+const btnSection = document.createElement("div");
+btnSection.className = "flex justify-between py-5 mb-6";
+
+const saveBTN = document.createElement("button");
+saveBTN.className = "border-solid border-2 border-zinc-100 text-zinc-100 bg-zinc-800 rounded-xl px-14 py-3";
+saveBTN.innerText = "Save Contact";
+
+
+const showBTN = document.createElement("button");
+showBTN.className = "border-solid border-2 border-zinc-100 text-zinc-100 bg-zinc-800 rounded-xl px-14 py-3";
+showBTN.innerText = "Show Contacts";
+
+btnSection.appendChild(saveBTN);
+btnSection.appendChild(showBTN);
+
+containerForm.appendChild(title);
+containerForm.appendChild(nameSection);
+containerForm.appendChild(phoneSection);
+containerForm.appendChild(saveOptions);
+containerForm.appendChild(btnSection);
+
+app?.appendChild(containerForm);
